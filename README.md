@@ -11,9 +11,14 @@ GameTrek is a decentralized adventure game where players can:
 
 ## Contracts
 - `character.clar`: Handles character creation and attributes
-- `items.clar`: NFT implementation for game items
+- `items.clar`: NFT implementation for game items with ownership verification
 - `battles.clar`: PvP battle system
 - `quests.clar`: Quest management and rewards
+
+## New Features
+- Added item ownership verification
+- Added ability to query item attributes
+- Enhanced item management security
 
 ## Getting Started
 1. Install Clarinet
