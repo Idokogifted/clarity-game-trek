@@ -27,5 +27,32 @@ Clarinet.test({
     
     assertEquals(block.receipts.length, 1);
     assertEquals(block.height, 2);
+
+    // Test item ownership
+    block = chain.mineBlock([
+      Tx.contractCall(
+        "items",
+        "owns-item",
+        [types.uint(1)],
+        wallet_1.address
+      )
+    ]);
+    assertEquals(block.receipts[0].result, types.bool(true));
+
+    // Test get attributes
+    block = chain.mineBlock([
+      Tx.contractCall(
+        "items",
+        "get-item-attributes",
+        [types.uint(1)],
+        wallet_1.address
+      )
+    ]);
+    
+    assertEquals(block.receipts[0].result.expectOk().expectSome(), {
+      'item-type': types.ascii("sword"),
+      'power': types.uint(25),
+      'level-req': types.uint(1)
+    });
   },
 });
