@@ -13,6 +13,11 @@
   }
 )
 
+;; Item ownership check
+(define-read-only (owns-item (item-id uint))
+  (is-eq (some tx-sender) (nft-get-owner? game-item item-id))
+)
+
 ;; Mint new item
 (define-public (mint-item (item-type (string-ascii 32)) (power uint) (level-req uint))
   (let
@@ -30,4 +35,9 @@
     (var-set next-item-id (+ item-id u1))
     (ok item-id)
   )
+)
+
+;; Get item attributes
+(define-read-only (get-item-attributes (item-id uint))
+  (ok (map-get? item-attributes item-id))
 )
